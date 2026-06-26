@@ -2,7 +2,10 @@
 
 //If you would like to, you can create a variable to store the API_URL here.
 //This is optional. if you do not want to, skip this and move on.
-
+const BASE = "https://fsa-crud-2aa9294fe819.herokuapp.com/api"
+const COHORT = "/2803-PUPPIES"
+const RESOURCE = "/players"
+const API = BASE + COHORT + RESOURCE
 /////////////////////////////
 /*This looks like a good place to declare any state or global variables you might need*/
 
