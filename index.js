@@ -40,7 +40,14 @@ const fetchAllPlayers = async () => {
  * Unless we know the id of the player we are trying to fetch, we cannot call fetchSinglePlayer()
  */
 const fetchSinglePlayer = async (playerId) => {
-  //TODO
+  try{
+    const response = await fetch(`${API}/${playerId}`)
+    const data = await response.json();
+    console.log(data)
+    selectedPuppy = data.data.player;
+  } catch (error){
+    console.log(error)
+  }
 };
 
 /**
