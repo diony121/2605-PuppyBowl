@@ -8,7 +8,8 @@ const RESOURCE = "/players"
 const API = BASE + COHORT + RESOURCE
 /////////////////////////////
 /*This looks like a good place to declare any state or global variables you might need*/
-
+let pppies = [];
+let selectedPuppy;
 ////////////////////////////
 
 /**
