@@ -102,23 +102,27 @@ const removePlayer = async (playerId) => {
  *
  */
 const playerCard = (puppyObject) => {
-  return `
-    <li class="playerCard" data-id="${puppyObject.id}">
+  const $li = document.createElement("li");
+  $li.className = "playerCard";
+  $li.dataset.id = puppyObject.id;
+  $li.innerHTML = `
       <img src="${puppyObject.imageUrl}" alt="${puppyObject.name}"/>
       <h2>${puppyObject.name}</h2>
-    </li>
   `;
+  $li.addEventListener("click", () => {
+    fetchSinglePlayer(puppyObject.id);
+  });
+  return $li;
 }
 
 const allPlayerCards = (array) => {
-  const allPlayers = document.createElement("ul");
-  allPlayers.classList.add("allPlayers");
+  const $ul = document.createElement("ul");
+  $ul.classList.add("allPlayers");
 
-  const $html = array.map((player) => {
-    return playerCard(player);
-  })
-  allPlayers.innerHTML = $html.join("")
-  return allPlayers;
+  const $cards =array.map(playerCard);
+
+  $ul.replaceChildren(...$cards);
+  return $ul;
 }
 
 const SelectedPuppy = () => {
@@ -166,7 +170,7 @@ const render = async () => {
     <main class="container">
       <section class="left-column">
         <h2>Roster</h2>
-        <<PuppyList></<PuppyList>
+        <PuppyList></PuppyList>
         <NewPuppyForm>Invite form</NewPuppyForm>
       </section>
       <section id="puppy-details">
@@ -176,8 +180,7 @@ const render = async () => {
     </main>
   `;
 $app.querySelector("PuppyList").replaceWith(allPlayerCards(puppies))
-$app.querySelector("NewPuppyForm").replaceWith(NewPuppyForm());
-  
+$app.querySelector("SelectedPuppy").replaceWith(SelectedPuppy());
 };
 
 
