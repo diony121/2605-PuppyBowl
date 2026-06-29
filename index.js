@@ -45,6 +45,7 @@ const fetchSinglePlayer = async (playerId) => {
     const data = await response.json();
     console.log(data)
     selectedPuppy = data.data.player;
+     render();
   } catch (error){
     console.log(error)
   }
@@ -102,8 +103,8 @@ const removePlayer = async (playerId) => {
  */
 const playerCard = (puppyObject) => {
   return `
-    <li class="playerCard">
-      <img src="${puppyObject.imageUrl}"/>
+    <li class="playerCard" data-id="${puppyObject.id}">
+      <img src="${puppyObject.imageUrl}" alt="${puppyObject.name}"/>
       <h2>${puppyObject.name}</h2>
     </li>
   `;
@@ -120,6 +121,38 @@ const allPlayerCards = (array) => {
   return allPlayers;
 }
 
+const SelectedPuppy = () => {
+  if (!selectedPuppy) {
+    const $p = document.createElement("p");
+    $p.className = "placeholder";
+    $p.textContent = " Select a puppy from the roster";
+    return $p;
+  }
+
+  const teamName = selectedPuppy.teamId ? "Ruff" : "Unassigned";
+  const image = selectedPuppy.imageUrl || "https://via.placeholder.com/150";
+
+  const $section = document.createElement("section");
+  $section.className = "selected-puppy";
+  $section.innerHTML = `
+    <h3>${selectedPuppy.name}</h3>
+    <figure>
+      <img src="${image}" alt="${selectedPuppy.name}" />
+    </figure>
+    <p><strong>ID:</strong> ${selectedPuppy.id}</p>
+    <p><strong>Breed:</strong> ${selectedPuppy.breed}</p>
+    <p><strong>Team:</strong> ${teamName}</p>
+    <p><strong>Status:</strong> ${selectedPuppy.status}</p>
+    <button class="remove-btn">Remove from roster</button>
+  `;
+
+  // Add event listener for remove button
+  const $delete = $section.querySelector(".remove-btn");
+  $delete.addEventListener("click", () => removePlayer(selectedPuppy.id));
+
+  return $section;
+};
+
 
 
 
@@ -133,8 +166,8 @@ const render = async () => {
     <main class="container">
       <section class="left-column">
         <h2>Roster</h2>
-        <PuppyList></PuppyList>
-        <InviteForm>Invite form</InviteForm>
+        <<PuppyList></<PuppyList>
+        <NewPuppyForm>Invite form</NewPuppyForm>
       </section>
       <section id="puppy-details">
         <h2>Puppy Details</h2>
@@ -142,8 +175,8 @@ const render = async () => {
       </section>
     </main>
   `;
-
- $app.querySelector("PuppyList").replaceWith(allPlayerCards(puppies));
+$app.querySelector("PuppyList").replaceWith(allPlayerCards(puppies))
+$app.querySelector("NewPuppyForm").replaceWith(NewPuppyForm());
   
 };
 
