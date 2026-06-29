@@ -66,7 +66,7 @@ const fetchSinglePlayer = async (playerId) => {
  */
 
 const addNewPlayer = async (newPlayer) => {
-  //TODO
+  
 };
 
 /**
@@ -100,6 +100,17 @@ const removePlayer = async (playerId) => {
  *    from the database and our current view without having to refresh
  *
  */
+const playerCard = (puppyObject) => {
+  const allPlayers = document.createElement("li");
+  allPlayers.classList("playerCard");
+  const html = allPlayers.matches((player) => {
+    return `
+    <img src="${puppyObject.imageUrl}"/>
+    <h2>${puppyObject.name}<H2>`
+  });
+}
+
+
 const render = () => {
   // TODO
 };
