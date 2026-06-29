@@ -1,17 +1,37 @@
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #fbffcc;
+  padding: 1.5rem;
+}
+
 .playerCard {
-  background-color: beige;
+  background-color: rgb(238, 217, 160);
   display: flex;
   gap: 1rem;
   margin-top: 0.5rem;
+  border-style: dashed;
+  border-radius: 3%;
+  text-align: center;
+  
 
   
 }
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
 .playerCard img {
   height: 7rem;
+  width: 7rem;
+  margin: 0.5rem;
+  border-radius: 10%;
 }
 
 .container{
   display: flex;
+  gap: 2rem;
 
 }
 .left-column {
@@ -23,7 +43,27 @@ h1 {
 }
 
 #puppy-details {
+  margin-top: 4rem;
   flex: 1;
+  background: white;
+  padding-left: 2rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 5rem;
+}
+.selected-puppy img {
+  width: 12.5rem;  
+  height: 12.5rem;  
+  border-radius: 0.75rem; 
+  display: block;
+  margin-bottom: 1rem;
+  display: block;
+  margin: 0 auto;
+  border: black solid 2px;
+}
+.selected-puppy h3{
+  text-align: center;
+  font-size: 2rem;
+  color: rgb(25, 139, 0);
 }
 
 .invite-form label {
@@ -37,4 +77,53 @@ h1 {
   display: block;
   width: 100%;
   margin-bottom: 0.5rem;
+}
+
+.remove-btn {
+  background-color: rgb(253, 156, 156);
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  font-weight: bolder;
+}
+
+.remove-btn:hover {
+  background-color: rgb(240, 80, 80);
+  transform: scale(1.05);
+}
+
+.invite-form h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: rgb(25, 139, 0);
+  margin-bottom: 1rem;
+}
+
+.invite-form h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  color: rgb(25, 139, 0);
+  margin-bottom: 1rem;
+}
+
+.invite-form button {
+  display: block;
+  width: 100%;
+  padding: 0.7rem;
+  background-color: rgb(238, 217, 160);
+  color: black;
+  border: 2px dashed #333;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.invite-form button:hover {
+  background-color: rgb(177, 255, 138);
+}
+.invite-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
