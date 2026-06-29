@@ -101,13 +101,13 @@ const removePlayer = async (playerId) => {
  *
  */
 const playerCard = (puppyObject) => {
-  const allPlayers = document.createElement("li");
-  allPlayers.classList("playerCard");
-  const html = allPlayers.matches((player) => {
-    return `
+  const singlePlayer = document.createElement("li");
+  singlePlayer.classList.add("playerCard");
+
+  singlePlayer.innerHTML = `
     <img src="${puppyObject.imageUrl}"/>
-    <h2>${puppyObject.name}<H2>`
-  });
+    <h2>${puppyObject.name}</h2>`
+  return singlePlayer
 }
 
 
