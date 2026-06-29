@@ -25,3 +25,16 @@ h1 {
 #puppy-details {
   flex: 1;
 }
+
+.invite-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.invite-form input,
+.invite-form select,
+.invite-form button {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}

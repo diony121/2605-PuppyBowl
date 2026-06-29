@@ -73,7 +73,7 @@ const addNewPlayer = async (newPlayer) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newPlayer),
     });
-    await getArtists();
+    await fetchAllPlayers();
   } catch (e) {
     console.error(e);
   }
@@ -100,6 +100,53 @@ const removePlayer = async (playerId) => {
   } catch (error) {
     console.log(error)
   }
+};
+
+const NewPuppyForm = () => {
+  const $form = document.createElement("form");
+  $form.className = "invite-form";
+  $form.innerHTML = `
+    <h3>Invite a puppy</h3>
+    <label>
+      Name
+      <input name="name" required />
+    </label>
+    <label>
+      Breed
+      <input name="breed" required />
+    </label>
+    <label>
+      Status
+      <select name="status">
+        <option value="bench">Bench</option>
+        <option value="field">Field</option>
+      </select>
+    </label>
+    <label>
+      Image URL
+      <input name="imageUrl" placeholder="https://example.com/dog.jpg" />
+    </label>
+    <button type="submit">Add Puppy</button>
+  `;
+
+
+  $form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const data = new FormData($form);
+    const imageUrl = data.get("imageUrl") || "https://via.placeholder.com/150";
+
+    await addNewPlayer({
+      name: data.get("name"),
+      breed: data.get("breed"),
+      status: data.get("status"),
+      imageUrl: imageUrl,
+    });
+
+    $form.reset(); // Clear the form
+  });
+
+  return $form;
 };
 
 /**
@@ -178,7 +225,7 @@ const SelectedPuppy = () => {
 
 
 const render = async () => {
-  const $app = document.querySelector("#app");
+  const $app = document.querySelector("#app"); 
   await fetchAllPlayers()
   $app.innerHTML = `
     <header>
@@ -188,7 +235,7 @@ const render = async () => {
       <section class="left-column">
         <h2>Roster</h2>
         <PuppyList></PuppyList>
-        <NewPuppyForm>Invite form</NewPuppyForm>
+        <NewPuppyForm></NewPuppyForm>
       </section>
       <section id="puppy-details">
         <h2>Puppy Details</h2>
@@ -197,6 +244,7 @@ const render = async () => {
     </main>
   `;
 $app.querySelector("PuppyList").replaceWith(allPlayerCards(puppies))
+  $app.querySelector("NewPuppyForm").replaceWith(NewPuppyForm());
 $app.querySelector("SelectedPuppy").replaceWith(SelectedPuppy());
 };
 
