@@ -67,7 +67,16 @@ const fetchSinglePlayer = async (playerId) => {
  */
 
 const addNewPlayer = async (newPlayer) => {
-  
+    try {
+    await fetch(API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newPlayer),
+    });
+    await getArtists();
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 /**
