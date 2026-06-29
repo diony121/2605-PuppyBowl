@@ -22,7 +22,6 @@ const fetchAllPlayers = async () => {
     const response = await fetch(API);
     const data = await response.json();
     puppies = data.data.players;
-    
   } catch (error){
     console.log(error)
   }
@@ -74,6 +73,7 @@ const addNewPlayer = async (newPlayer) => {
       body: JSON.stringify(newPlayer),
     });
     await fetchAllPlayers();
+    render()
   } catch (e) {
     console.error(e);
   }
@@ -97,6 +97,7 @@ const removePlayer = async (playerId) => {
     });
     selectedPuppy = undefined;
     await fetchAllPlayers();
+    render()
   } catch (error) {
     console.log(error)
   }
@@ -134,7 +135,7 @@ const NewPuppyForm = () => {
     event.preventDefault();
 
     const data = new FormData($form);
-    const imageUrl = data.get("imageUrl") || "https://via.placeholder.com/150";
+    const imageUrl = data.get("imageUrl");
 
     await addNewPlayer({
       name: data.get("name"),
