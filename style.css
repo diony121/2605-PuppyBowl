@@ -1,0 +1,27 @@
+.playerCard {
+  background-color: beige;
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+
+  
+}
+.playerCard img {
+  height: 7rem;
+}
+
+.container{
+  display: flex;
+
+}
+.left-column {
+
+ flex: 1;
+}
+h1 {
+  text-align: center;
+}
+
+#puppy-details {
+  flex: 1;
+}

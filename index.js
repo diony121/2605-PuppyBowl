@@ -21,7 +21,7 @@ const fetchAllPlayers = async () => {
   try{
     const response = await fetch(API);
     const data = await response.json();
-    puppies = data.data;
+    puppies = data.data.players;
     
   } catch (error){
     console.log(error)
@@ -126,8 +126,24 @@ const allPlayerCards = (array) => {
 const render = async () => {
   const $app = document.querySelector("#app");
   await fetchAllPlayers()
-  $app.innerHTML = "";
-$app.append(allPlayerCards(puppies));
+  $app.innerHTML = `
+    <header>
+      <h1> Puppy Bowl Roster</h1>
+    </header>
+    <main class="container">
+      <section class="left-column">
+        <h2>Roster</h2>
+        <PuppyList></PuppyList>
+        <InviteForm>Invite form</InviteForm>
+      </section>
+      <section id="puppy-details">
+        <h2>Puppy Details</h2>
+        <SelectedPuppy></SelectedPuppy>
+      </section>
+    </main>
+  `;
+
+ $app.querySelector("PuppyList").replaceWith(allPlayerCards(puppies));
   
 };
 
