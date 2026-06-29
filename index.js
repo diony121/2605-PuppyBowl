@@ -82,7 +82,15 @@ const addNewPlayer = async (newPlayer) => {
  */
 
 const removePlayer = async (playerId) => {
-  //TODO
+  try{
+    await fetch(`${API}/${playerId}`, {
+      method: "DELETE",
+    });
+    selectedPuppy = undefined;
+    await fetchAllPlayers();
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 /**
