@@ -101,19 +101,37 @@ const removePlayer = async (playerId) => {
  *
  */
 const playerCard = (puppyObject) => {
-  const singlePlayer = document.createElement("li");
-  singlePlayer.classList.add("playerCard");
+  return `
+    <li class="playerCard">
+      <img src="${puppyObject.imageUrl}"/>
+      <h2>${puppyObject.name}</h2>
+    </li>
+  `;
+}
 
-  singlePlayer.innerHTML = `
-    <img src="${puppyObject.imageUrl}"/>
-    <h2>${puppyObject.name}</h2>`
-  return singlePlayer
+const allPlayerCards = (array) => {
+  const allPlayers = document.createElement("ul");
+  allPlayers.classList.add("allPlayers");
+
+  const $html = array.map((player) => {
+    return playerCard(player);
+  })
+  allPlayers.innerHTML = $html.join("")
+  return allPlayers;
 }
 
 
-const render = () => {
-  // TODO
+
+
+const render = async () => {
+  const $app = document.querySelector("#app");
+  await fetchAllPlayers()
+  $app.innerHTML = "";
+$app.append(allPlayerCards(puppies));
+  
 };
+
+
 
 /**
  * Initializes the app by calling render
